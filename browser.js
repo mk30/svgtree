@@ -2,20 +2,20 @@ var createElement = require('svg-create-element');
 var svg = createElement('svg');
 svg.setAttribute("height", "100%")
 svg.setAttribute("width", "100%")
-var w = 10;
-var h = 20;
-var x = 100;
-var y = 400;
+var trunkw = 10;
+var trunkh = 20;
+var trunkx = 100;
+var trunky = 400;
 var rect = 
   createElement('rect', {
     id: 'trunk',
     fill: 'SaddleBrown',
     stroke: 'olive',
     strokeWidth: 4,
-    x: x,
-    y: y,
-    width: w,
-    height: h,
+    x: trunkx,
+    y: trunky,
+    width: trunkw,
+    height: trunkh,
   });
 var branch = 
   createElement('rect', {
@@ -23,23 +23,23 @@ var branch =
     fill: 'SaddleBrown',
     stroke: 'olive',
     strokeWidth: 4,
-    x: x-4,
-    y: 400 -h,
-    width: w,
-    height: h,
+    x: trunkx-4,
+    y: 400 -trunkh,
+    width: trunkw,
+    height: trunkh,
   });
 svg.appendChild(rect)
 document.body.appendChild(svg);
 
-function hwgrow (){
-  if (w<150 && h<300){
-    h = h + 5;
-    w++;
-    y = 400 - h;
-    rect.setAttribute("width", w);
-    rect.setAttribute("height", h);
-    rect.setAttribute("y", y);
-    window.requestAnimationFrame(hwgrow)
+function trgrow (){
+  if (trunkw<150 && trunkh<300){
+    trunkh = trunkh + 5;
+    trunkw++;
+    trunky = 400 - trunkh;
+    rect.setAttribute("width", trunkw);
+    rect.setAttribute("height", trunkh);
+    rect.setAttribute("y", trunky);
+    window.requestAnimationFrame(trgrow)
   }
 };
 function brgrow() {
@@ -49,12 +49,11 @@ function brgrow() {
     window.requestAnimationFrame(brgrow)
   }
   else {
-      branch.setAttribute("width", w/2);
-      branch.setAttribute("height", h);
-      //branch.setAttribute("x", x-5);
-      branch.setAttribute("y", 400- h*2 );
+      branch.setAttribute("width", trunkw/2);
+      branch.setAttribute("height", trunkh);
+      branch.setAttribute("y", 400- trunkh*2 );
       window.requestAnimationFrame(brgrow)
     }
 };
-window.requestAnimationFrame(hwgrow)
+window.requestAnimationFrame(trgrow)
 window.requestAnimationFrame(brgrow);
