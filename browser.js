@@ -8,16 +8,24 @@ var fn = function (){
 }
 
 function recur (depth) {
-  if (depth >= 3){
+  if (depth >= 2){
     return '' 
   }
   return  h('g', {
   }, [
     h('rect', { 
-      fill: 'red', x: 50, y: 50, width: 50, height: 100 }), 
-    h('g',{transform: 'translate(10,-10) scale(0.8) rotate(-5)'
+      fill: 'none',
+      stroke: 'olive',
+      x: 200, 
+      y: 200, 
+      width: 50, 
+      height: 150,
+    }), 
+    h('g',{transform: 
+      'translate(0) scale(1) rotate(-225 225 200)'
       }, [recur(depth+1)]),
-    h('g',{transform: 'translate(-10,-10) scale(0.8) rotate(5)'
+    h('g',{transform: 
+      'translate(0) scale(1) rotate(225 225 200)'
       }, [recur(depth+1)])
     ]
   )
