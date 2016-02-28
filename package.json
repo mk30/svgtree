@@ -5,7 +5,7 @@
   "main": "browser.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify browser.js -o bundle.js -dv"
+    "build": "browserify browser.js -o bundle.js -dv",
     "watch": "watchify browser.js -o bundle.js -dv"
   },
   "author": "marina",
