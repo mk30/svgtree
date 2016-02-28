@@ -8,7 +8,7 @@ var fn = function (){
 }
 
 function recur (depth) {
-  if (depth >= 2){
+  if (depth >= 5){
     return '' 
   }
   return  h('g', {
@@ -19,13 +19,13 @@ function recur (depth) {
       x: 200, 
       y: 200, 
       width: 50, 
-      height: 150,
+      height: 100,
     }), 
     h('g',{transform: 
-      'translate(0) scale(1) rotate(-225 225 200)'
+      'translate(-50,-50) scale(1) rotate(-25 225 200)'
       }, [recur(depth+1)]),
     h('g',{transform: 
-      'translate(0) scale(1) rotate(225 225 200)'
+      'translate(50, -50) scale(1) rotate(25 225 200)'
       }, [recur(depth+1)])
     ]
   )
