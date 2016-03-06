@@ -6,6 +6,7 @@ var main = require("main-loop");
 var initState = {
   width: 50,
   height: 100,
+  inittime: Date.now(),
   time: Date.now()
 }
 var loop = main(initState, render, vdom);
@@ -18,7 +19,8 @@ function render (state){
 }
 
 function recur (depth, state) {
-  if (depth >= 3){
+  var dd = (state.time - state.inittime)/4000
+  if (depth >= Math.min(5, dd)){
     return '' 
   }
   return  h('g', {
@@ -41,10 +43,10 @@ function recur (depth, state) {
   )
 }
 function update(){
-  loop.state.width = loop.state.width + 1;
-  loop.state.height = loop.state.height + 3;
+  //loop.state.width = loop.state.width + 1;
+  //loop.state.height = loop.state.height + 3;
+  loop.state.time = Date.now();
   loop.update(loop.state); 
-  console.log(loop.state.height);
-  console.log(loop.state.width);
+  console.log((loop.state.time - loop.state.inittime)/5000);
 }
 window.setInterval(update,50);
