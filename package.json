@@ -11,9 +11,10 @@
   "author": "marina",
   "license": "MIT",
   "dependencies": {
+    "browserify": "^13.0.0",
+    "main-loop": "^3.2.0",
     "virtual-dom": "^2.1.1",
     "virtual-hyperscript-svg": "^2.0.0",
-    "browserify": "^13.0.0",
     "watchify": "^3.7.0"
   }
 }
