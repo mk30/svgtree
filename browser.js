@@ -5,18 +5,19 @@ var main = require("main-loop");
 
 var initState = {
   width: 50,
-  height: 100
+  height: 100,
+  time: Date.now()
 }
 var loop = main(initState, render, vdom);
 document.body.appendChild(loop.target)
 
 function render (state){
   return h('svg', { width: '100%', height: '100%' }, [
-    recur(0, state.width, state.height)
+    recur(0, state)
   ]);
 }
 
-function recur (depth, width, height) {
+function recur (depth, state) {
   if (depth >= 3){
     return '' 
   }
@@ -27,15 +28,15 @@ function recur (depth, width, height) {
       stroke: 'olive',
       x: 200, 
       y: 200, 
-      width: width, 
-      height: height,
+      width: state.width, 
+      height: state.height,
     }), 
     h('g',{transform: 
       'translate(-50,-50) scale(1) rotate(-25 225 200)'
-      }, [recur(depth+1, width, height)]),
+      }, [recur(depth+1, state)]),
     h('g',{transform: 
       'translate(50, -50) scale(1) rotate(25 225 200)'
-      }, [recur(depth+1, width, height)])
+      }, [recur(depth+1, state)])
     ]
   )
 }
