@@ -4,8 +4,8 @@ var h = require('virtual-hyperscript-svg');
 var main = require("main-loop");
 
 var initState = {
-  width: 50,
-  height: 100,
+  width: 25,
+  height: 150,
   inittime: Date.now(),
   time: Date.now()
 }
@@ -19,7 +19,8 @@ function render (state){
 }
 
 function recur (depth, state) {
-  var dd = (state.time - state.inittime)/4000
+  var n = 350
+  var dd = (state.time - state.inittime)/1000
   if (depth >= Math.min(5, dd)){
     return '' 
   }
@@ -28,16 +29,16 @@ function recur (depth, state) {
     h('rect', { 
       fill: 'none',
       stroke: 'olive',
-      x: 200, 
-      y: 200, 
+      x: n, 
+      y: n, 
       width: state.width, 
       height: state.height,
     }), 
     h('g',{transform: 
-      'translate(-50,-50) scale(1) rotate(-25 225 200)'
+      'translate(-'+n/4+',-'+n/2+') scale(1) rotate(-25 '+n*1.125+' '+n+')'
       }, [recur(depth+1, state)]),
     h('g',{transform: 
-      'translate(50, -50) scale(1) rotate(25 225 200)'
+      'translate('+n/4+', -'+n/2+') scale(1) rotate(25 '+n*1.125+' '+n+')'
       }, [recur(depth+1, state)])
     ]
   )
@@ -47,6 +48,5 @@ function update(){
   //loop.state.height = loop.state.height + 3;
   loop.state.time = Date.now();
   loop.update(loop.state); 
-  console.log((loop.state.time - loop.state.inittime)/5000);
 }
 window.setInterval(update,50);
