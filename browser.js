@@ -5,7 +5,7 @@ var main = require("main-loop");
 
 var initState = {
   width: 25,
-  height: 150,
+  height: 5,
   inittime: Date.now(),
   time: Date.now()
 }
@@ -32,7 +32,7 @@ function recur (depth, state) {
       x: n, 
       y: n, 
       width: state.width, 
-      height: state.height,
+      height: state.height * n/10,
     }), 
     h('g',{transform: 
       'translate(-'+n/4+',-'+n/2+') scale(1) rotate(-25 '+n*1.125+' '+n+')'
