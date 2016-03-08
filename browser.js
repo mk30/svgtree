@@ -41,7 +41,7 @@ function recur (depth, state) {
       y: 400 - ((state.time - state.inittime)/1000*(currentdepth/5)), 
       //y: state.height + 300,
       width: state.width, 
-      height: state.height * currentdepth,
+      height: state.height,
     }), 
     h('g',{transform: 
       'translate(-'+state.width+',-'+ state.height + ') scale(1) rotate(-25 225 200)'
