@@ -19,9 +19,9 @@ function render (state){
 }
 
 function recur (depth, state) {
-  var currentdepth = Math.floor(Math.min(5, (state.time -
-  state.inittime)/1000));
-  if (depth >= currentdepth){
+  var currentdepth = Math.min(5, (state.time - state.inittime)/1000)
+  var n = 100*currentdepth
+  if (depth >= 5){
     return '' 
   }
   /*
@@ -41,7 +41,8 @@ function recur (depth, state) {
       y: 400 - ((state.time - state.inittime)/1000*(currentdepth/5)), 
       //y: state.height + 300,
       width: state.width, 
-      height: state.height,
+      height: Math.max(0, (state.time -
+      state.inittime)/2000*state.height),
     }), 
     h('g',{transform: 
       'translate(-'+state.width+',-'+ state.height + ') scale(1) rotate(-25 225 200)'
