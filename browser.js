@@ -27,7 +27,7 @@ function maxheight (max, ddd){
     return max
   }
   else
-    var ht = state.height*ddd 
+    var ht = Math.min(max, state.height*ddd) 
     console.log(ht)
     return ht
 }
