@@ -19,7 +19,8 @@ function render (state){
 }
 
 function recur (depth, state) {
-  var n = 400
+  var m = 400
+  var n = 100
   var dd = (state.time - state.inittime)/1000
   if (depth >= Math.min(5, dd)){
     return '' 
@@ -29,16 +30,18 @@ function recur (depth, state) {
     h('rect', { 
       fill: 'none',
       stroke: 'olive',
-      x: n, 
-      y: n, 
+      x: m, 
+      y: 5*n/dd, 
       width: state.width, 
-      height: state.height * (n/8),
+      height: state.height * (n/2),
     }), 
     h('g',{transform: 
-      'translate(-'+n/4+',-'+n/2+') scale(1) rotate(-25 '+n*1.125+' '+n+')'
+      'translate(-'+m/4+',-'+n/2+
+        ') scale(1) rotate(-25 '+m+' '+n+')'
       }, [recur(depth+1, state)]),
     h('g',{transform: 
-      'translate('+n/4+', -'+n/2+') scale(1) rotate(25 '+n*1.125+' '+n+')'
+      'translate('+m/4+', -'+n/2+
+        ') scale(1) rotate(25 '+m+' '+n+')'
       }, [recur(depth+1, state)])
     ]
   )
