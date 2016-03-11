@@ -18,16 +18,19 @@ function render (state){
   ]);
 }
 
-function maxheight (max, dd){
-  if (150*dd >= max){
+
+function recur (depth, state) {
+
+function maxheight (max, ddd){
+  if (state.height*ddd >= max){
+    console.log(max)
     return max
   }
   else
-    console.log('cat')
-    return 150*dd 
+    var ht = state.height*ddd 
+    console.log(ht)
+    return ht
 }
-
-function recur (depth, state) {
   var m = 400
   var n = 100
   var dd = (state.time - state.inittime)/1000
@@ -45,7 +48,7 @@ function recur (depth, state) {
         //at beginning should be min state.height, as
         //approaches end (over time), should go at a fixed
         //rate until depth stops time)
-        height: maxheight(state.height, dd)
+        height: maxheight(300, dd)
         //Math.max(state.height*dd, 200)
         ///1000*state.height),
         //Math.max(0, state.height - dd)
