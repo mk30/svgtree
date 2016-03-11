@@ -5,7 +5,7 @@ var main = require("main-loop");
 
 var initState = {
   width: 25,
-  height: 5,
+  height: 100,
   inittime: Date.now(),
   time: Date.now()
 }
@@ -25,26 +25,34 @@ function recur (depth, state) {
   if (depth >= Math.min(5, dd)){
     return '' 
   }
-  return  h('g', {
-  }, [
-    h('rect', { 
-      fill: 'none',
-      stroke: 'olive',
-      x: m, 
-      y: 5*n/dd, 
-      width: state.width, 
-      height: state.height * (n/2),
-    }), 
-    h('g',{transform: 
-      'translate(-'+m/4+',-'+n/2+
-        ') scale(1) rotate(-25 '+m+' '+n+')'
-      }, [recur(depth+1, state)]),
-    h('g',{transform: 
-      'translate('+m/4+', -'+n/2+
-        ') scale(1) rotate(25 '+m+' '+n+')'
-      }, [recur(depth+1, state)])
-    ]
-  )
+  else  return  h('g', {
+    }, [
+      h('rect', { 
+        fill: 'none',
+        stroke: 'olive',
+        x: m, 
+        y: 10*n/dd, 
+        width: state.width, 
+        //at beginning should be min state.height, as
+        //approaches end (over time), should go at a fixed
+        //rate until depth stops time)
+        height: Math.max(state.height, (state.time -
+        state.inittime)/5000)
+        ///1000*state.height),
+        //Math.max(0, state.height - dd)
+        //n/10*dd,
+
+      }), 
+      h('g',{transform: 
+        'translate(-'+m/8+',-'+n/4+
+          ') scale(1) rotate(-25 '+m+' '+n+')'
+        }, [recur(depth+1, state)]),
+      h('g',{transform: 
+        'translate('+m/8+', -'+n/4+
+          ') scale(1) rotate(25 '+m+' '+n+')'
+        }, [recur(depth+1, state)])
+      ]
+    )
 }
 function update(){
   //loop.state.width = loop.state.width + 1;
