@@ -18,22 +18,11 @@ function render (state){
   ]);
 }
 
-
 function recur (depth, state) {
-
-function maxheight (max, ddd){
-  if (state.height*ddd >= max){
-    console.log(max)
-    return max
-  }
-  else
-    var ht = Math.min(max, state.height*ddd) 
-    console.log(ht)
-    return ht
-}
   var m = 400
-  var n = 100
-  var dd = (state.time - state.inittime)/1000
+  var n =25 
+  var dd = (state.time - state.inittime)/500
+  var height = Math.min(400, state.height*dd)
   if (depth >= Math.min(5, dd)){
     return '' 
   }
@@ -43,12 +32,12 @@ function maxheight (max, ddd){
         fill: 'none',
         stroke: 'olive',
         x: m, 
-        y: 10*n/dd, 
+        y: 400-height, 
         width: state.width, 
         //at beginning should be min state.height, as
         //approaches end (over time), should go at a fixed
         //rate until depth stops time)
-        height: maxheight(300, dd)
+        height: height
         //Math.max(state.height*dd, 200)
         ///1000*state.height),
         //Math.max(0, state.height - dd)
@@ -56,12 +45,12 @@ function maxheight (max, ddd){
 
       }), 
       h('g',{transform: 
-        'translate(-'+m/4+',-'+n/2+
-          ') scale(1) rotate(-25 '+m+' '+n+')'
+        'translate(-'+m/6+',-'+n/2+
+          ') scale(1) rotate(-12 '+m+' '+n+')'
         }, [recur(depth+1, state)]),
       h('g',{transform: 
-        'translate('+m/4+', -'+n+
-          ') scale(1) rotate(25 '+m+' '+n+')'
+        'translate('+m/6+', -'+n+
+          ') scale(1) rotate(12 '+m+' '+n+')'
         }, [recur(depth+1, state)])
       ]
     )
