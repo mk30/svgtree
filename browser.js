@@ -49,4 +49,4 @@ function update(){
   loop.state.time = Date.now();
   loop.update(loop.state); 
 }
-window.setInterval(update,50);
+setInterval(update,50);
