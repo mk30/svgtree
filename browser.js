@@ -20,10 +20,10 @@ function render (state){
 
 function recur (depth, state) {
   var dd = (state.time - state.inittime)/500
-  var height = Math.min(200, state.height*dd)
+  var height = Math.min(250, state.height*dd/2)
   var x = 400;
-  var y = 400-height
-  if (depth >= Math.min(2, dd)){
+  var y = 450-height
+  if (depth >= Math.min(3, dd)){
     return '' 
   }
   else  return  h('g', {
@@ -37,10 +37,10 @@ function recur (depth, state) {
         height: height
       }), 
       h('g',{transform: 
-        'translate(0,0) scale(1) rotate(-225 '+x+' '+y+')'
+        'translate(0,0) scale(1) rotate(-220 '+x+' '+y+')'
         }, [recur(depth+1, state)]),
       h('g',{transform: 
-        'translate(0,0) scale(1) rotate(225 '+x+' '+y+')'
+        'translate(0,0) scale(1) rotate(220 '+x+' '+y+')'
         }, [recur(depth+1, state)])
       ]
     )
