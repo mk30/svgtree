@@ -5,7 +5,7 @@ var main = require("main-loop");
 
 var initState = {
   width: 25,
-  height: 100,
+  height: 10,
   inittime: Date.now(),
   time: Date.now()
 }
@@ -20,10 +20,11 @@ function render (state){
 
 function recur (depth, state) {
   var dd = (state.time - state.inittime)/500
-  var height = Math.min(250, state.height*dd/2)
+  var height = Math.min(300, state.height*dd)
+  height = Math.max(0, height - depth*50)
   var x = 400;
   var y = 450-height
-  if (depth >= Math.min(3, dd)){
+  if (depth >= Math.min(4, dd)){
     return '' 
   }
   else  return  h('g', {
