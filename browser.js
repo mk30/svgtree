@@ -24,7 +24,7 @@ function recur (depth, state) {
   height = Math.max(0, height - depth*50)
   var x = 400;
   var y = 450-height
-  if (depth >= Math.min(4, dd)){
+  if (depth >= Math.min(5, dd)){
     return '' 
   }
   else  return  h('g', {
@@ -38,10 +38,10 @@ function recur (depth, state) {
         height: height
       }), 
       h('g',{transform: 
-        'translate(0,0) scale(1) rotate(-220 '+x+' '+y+')'
+        'translate(0,-50) scale(1) rotate(-45 '+x+' '+y+')'
         }, [recur(depth+1, state)]),
       h('g',{transform: 
-        'translate(0,0) scale(1) rotate(220 '+x+' '+y+')'
+        'translate(0,-50) scale(1) rotate(45 '+x+' '+y+')'
         }, [recur(depth+1, state)])
       ]
     )
