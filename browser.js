@@ -31,8 +31,8 @@ function recur (depth, state, a) {
   else  return  h('g', {
     }, [
       h('rect', { 
-        fill: 'none',
-        stroke: 'olive',
+        fill: 'olive',
+        stroke: 'lightgreen',
         x: x, 
         y: y - 0.5*prevheight, 
         width: state.width, 
