@@ -14,17 +14,18 @@ document.body.appendChild(loop.target)
 
 function render (state){
   return h('svg', { width: '100%', height: '100%' }, [
-    recur(0, state)
+    recur(0, state, 0)
   ]);
 }
 
-function recur (depth, state) {
+function recur (depth, state, a) {
   var dd = (state.time - state.inittime)/500
-  var height = Math.min(300, state.height*dd)
-  height = Math.max(0, height - depth*50)
-  var x = 400;
-  var y = 450-height
-  if (depth >= Math.min(3, dd)){
+  var ht = Math.min(400, state.height*dd)
+  var height = Math.max(0, ht - depth*100)
+  var prevheight = Math.max(0, ht - (depth-1)*100)
+  var x = 400 + 0.5*Math.sin(a/180*Math.PI)*height
+  var y = 450 - 0.5*Math.cos(a/180*Math.PI)*height
+  if (depth >= Math.min(4, dd)){
     return '' 
   }
   else  return  h('g', {
@@ -33,16 +34,16 @@ function recur (depth, state) {
         fill: 'none',
         stroke: 'olive',
         x: x, 
-        y: y - 1.5*height, 
+        y: y - 0.5*prevheight, 
         width: state.width, 
         height: height
       }), 
       h('g',{transform: 
-        'translate(-100,-150) scale(1) rotate(-45 '+x+' '+y+')'
-        }, [recur(depth+1, state)]),
+        'translate(0, -50) scale(1) rotate(-25 '+y+' '+x+')'
+        }, [recur(depth+1, state, a)]),
       h('g',{transform: 
-        'translate(100,-150) scale(1) rotate(45 '+x+' '+y+')'
-        }, [recur(depth+1, state)])
+        'translate(0, -100) scale(1) rotate(25 '+x+' '+x+')'
+        }, [recur(depth+1, state, a)])
       ]
     )
 }
