@@ -4,8 +4,8 @@ var h = require('virtual-hyperscript-svg');
 var main = require("main-loop");
 
 var initState = {
-  width: 20,
-  height: 60,
+  width: 25,
+  height: 10,
   inittime: Date.now(),
   time: Date.now()
 }
@@ -14,50 +14,41 @@ document.body.appendChild(loop.target)
 
 function render (state){
   return h('svg', { width: '100%', height: '100%' }, [
-    recur(0, state)
+    recur(0, state, 0)
   ]);
 }
 
-function recur (depth, state) {
-  var currentdepth = Math.min(5, (state.time - state.inittime)/1000)
-  var n = 100*currentdepth
-  if (depth >= 5){
+function recur (depth, state, a) {
+  var dd = (state.time - state.inittime)/500
+  var ht = Math.min(400, state.height*dd)
+  var height = Math.max(0, ht - depth*100)
+  var prevheight = Math.max(0, ht - (depth-1)*100)
+  var x = 400 + 0.5*Math.sin(a/180*Math.PI)*height
+  var y = 450 - 0.5*Math.cos(a/180*Math.PI)*height
+  if (depth >= Math.min(4, dd)){
     return '' 
   }
-  /*
-  var height = state.height;
-  if (depth == currentdepth -1){
-    //height = height*(depth/5)
-    //recur(depth+1, state)
-      height = state.height
-  }
-  */
-  return  h('g', {
-  }, [
-    h('rect', { 
-      fill: 'none',
-      stroke: 'olive',
-      x: 400 - ((state.time - state.inittime)/1000*(currentdepth/5)), 
-      y: 400 - ((state.time - state.inittime)/1000*(currentdepth/5)), 
-      //y: state.height + 300,
-      width: state.width, 
-      height: Math.max(0, (state.time -
-      state.inittime)/2000*state.height),
-    }), 
-    h('g',{transform: 
-      'translate(-'+state.width+',-'+ state.height + ') scale(1) rotate(-25 225 200)'
-      }, [recur(depth+1, state)]),
-    h('g',{transform: 
-      'translate('+state.width+', -'+state.height+') scale(1) rotate(25 225 200)'
-      }, [recur(depth+1, state)])
-    ]
-  )
+  else  return  h('g', {
+    }, [
+      h('rect', { 
+        fill: 'olive',
+        stroke: 'lightgreen',
+        x: x, 
+        y: y - 0.5*prevheight, 
+        width: state.width, 
+        height: height
+      }), 
+      h('g',{transform: 
+        'translate(0, -50) scale(1) rotate(-25 '+y+' '+x+')'
+        }, [recur(depth+1, state, a)]),
+      h('g',{transform: 
+        'translate(0, -100) scale(1) rotate(25 '+x+' '+x+')'
+        }, [recur(depth+1, state, a)])
+      ]
+    )
 }
 function update(){
-  //loop.state.width = loop.state.width + 1;
-  //loop.state.height = loop.state.height + 3;
   loop.state.time = Date.now();
   loop.update(loop.state); 
-  //console.log((loop.state.time - loop.state.inittime)/5000);
 }
-window.setInterval(update,50);
+setInterval(update,50);
